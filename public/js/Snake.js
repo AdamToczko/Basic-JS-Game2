@@ -58,13 +58,26 @@ export default class Snake {
     }
 
     move() {
+
+        // we need to know where head is moving and stays on grid 
+        let x = this.body[0].x + this.direction.x * this.segment
+        let y = this.body[0].y + this.direction.y * this.segment
+
+        // eating the apple and increasing body size 
+        if(this.apple.x === x && this.apple.y === y) {
+            this.body.push(this.scene.add.rectangle(0,0,this.segment, this.segment,0xffffff).setOrigin(0));
+            this.positionApple();
+        }
+
+
         // as ther will be more segments in for loop we will attach each new segment to one before 
         for(let index = this.body.length - 1; index > 0; index --){
             this.body[index].x = this.body[index-1].x; 
             this.body[index].y = this.body[index-1].y;
         }
-        this.body[0].x += this.direction.x *16; 
-        this.body[0].y += this.direction.y *16;
+        this.body[0].x = x;
+        this.body[0].y = y;
+
     }
     
 } 
