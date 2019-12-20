@@ -1,12 +1,16 @@
+import Snake from "./Snake.js"
+
 export default class MainScene extends Phaser.Scene {
     constructor() {
         super('MainScene');
     }
 
-    create() {}
+    create() {
+        this.snake = new Snake(this) // create instant of snake when scene starts
+    }
 
     update(time) {
-        console.log('update');
+        this.snake.update(time); // update method on snake 
     }
 
 
