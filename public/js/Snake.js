@@ -38,6 +38,8 @@ export default class Snake {
     }
 
     move() {
+        this.body[1].x = this.body[0].x; // attach tail to body works with 2 segments 
+        this.body[1].y = this.body[0].y;
         this.body[0].x += this.direction.x *10;
         this.body[0].y += this.direction.y *10;
     }
