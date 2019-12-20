@@ -8,12 +8,29 @@ export default class Snake {
 
         this.direction = Phaser.Math.Vector2.RIGHT; // start movement direction
         this.body =[]; //snake will grow
-        this.body.push(this.scene.add.rectangle(100,100,this.segment,this.segment,0xff0000)
-        .setOrigin(0) // head
+        this.body.push(this.scene.add   // position snake on a grid multiple of segment 
+        .rectangle(
+            this.scene.game.config.width/2,
+            this.scene.game.config.height/2,
+            this.segment,
+            this.segment,
+            0xff0000
+            )
+            .setOrigin(0) // head
         );
-        this.apple = this.scene.add.rectangle(150,150,this.segment,this.segment,0x00ff00)
+
+        this.apple = this.scene.add.rectangle(0,0,this.segment,this.segment,0x00ff00)
         .setOrigin(0); // apple
+
+        this.positionApple();
+
         scene.input.keyboard.on('keydown', e => {this.keydown(e)}) // key press detection
+    }
+
+    positionApple() {
+        // as this.segment is 16 we need to position apple on a grid with number that is multiple of 16 
+        this.apple.x = Math.floor((Math.random() * this.scene.game.config.width) / this.segment) * this.segment;
+        this.apple.y = Math.floor((Math.random() * this.scene.game.config.height) / this.segment) * this.segment
     }
 
     keydown(event) {
@@ -46,8 +63,8 @@ export default class Snake {
             this.body[index].x = this.body[index-1].x; 
             this.body[index].y = this.body[index-1].y;
         }
-        this.body[0].x += this.direction.x *10; 
-        this.body[0].y += this.direction.y *10;
+        this.body[0].x += this.direction.x *16; 
+        this.body[0].y += this.direction.y *16;
     }
     
 } 
