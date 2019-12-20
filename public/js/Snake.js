@@ -4,13 +4,15 @@ export default class Snake {
 
         this.lastMoveTime = 0;
         this.moveInterval = 500;
+        this.segment = 16
 
         this.direction = Phaser.Math.Vector2.RIGHT; // start movement direction
         this.body =[]; //snake will grow
-        this.body.push(this.scene.add.rectangle(100,100,16,16,0xff0000).setOrigin(0)); // head
-        this.body.push(this.scene.add.rectangle(0,0,16,16,0x0000ff).setOrigin(0)); //body1
-        this.body.push(this.scene.add.rectangle(0,0,16,16,0xffffff).setOrigin(0)); //body2
-
+        this.body.push(this.scene.add.rectangle(100,100,this.segment,this.segment,0xff0000)
+        .setOrigin(0) // head
+        );
+        this.apple = this.scene.add.rectangle(150,150,this.segment,this.segment,0x00ff00)
+        .setOrigin(0); // apple
         scene.input.keyboard.on('keydown', e => {this.keydown(e)}) // key press detection
     }
 
