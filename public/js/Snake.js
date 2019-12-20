@@ -3,7 +3,7 @@ export default class Snake {
         this.scene = scene; // creating and assignin scene property 
 
         this.lastMoveTime = 0;
-        this.moveInterval = 500;
+        this.moveInterval = 300;
         this.segment = 16
 
         this.direction = Phaser.Math.Vector2.RIGHT; // start movement direction
@@ -78,13 +78,22 @@ export default class Snake {
         this.body[0].x = x;
         this.body[0].y = y;
 
-        // make snake die for going out of bounds 
+        // snake dies going out of bounds 
         if( this.body[0].x < 0 || 
             this.body[0].x >= this.scene.game.config.width || 
             this.body[0].y < 0 || 
             this.body[0].y >= this.scene.game.config.height) {
                 this.scene.scene.restart();
         }
+        // snake dies eating his own tail head === any of tail position
+        let tail = this.body.slice(1);
+        //if(tail.filter(s => s.x === this.body[0].x && s.y === this.body[0].y).length > 0) // we will get array back for every segment that makes this true and then length will be greater then 0
+        //shorter way with array some method which returns true or false 
+        if(tail.some(s => s.x === this.body[0].x && s.y === this.body[0].y))
+        {
+            this.scene.scene.restart();
+        }
+
     }
     
 } 
