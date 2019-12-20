@@ -1,12 +1,16 @@
 export default class Snake {
     constructor(scene) {
         this.scene = scene; // creating and assignin scene property 
-        this.direction = Phaser.Math.Vector2.RIGHT;
-        this.body =[]; //snake will grow
-        this.body.push(this.scene.add.rectangle(0,0,16,16,0xff0000).setOrigin(0));
-        this.body.push(this.scene.add.rectangle(0,0,16,16,0x0000ff).setOrigin(0));
 
-        scene.input.keyboard.on('keydown', e => {this.keydown(e)})
+        this.lastMoveTime = 0;
+        this.moveInterval = 500;
+
+        this.direction = Phaser.Math.Vector2.RIGHT; // start movement direction
+        this.body =[]; //snake will grow
+        this.body.push(this.scene.add.rectangle(0,0,16,16,0xff0000).setOrigin(0)); // head
+        this.body.push(this.scene.add.rectangle(0,0,16,16,0x0000ff).setOrigin(0)); //body
+
+        scene.input.keyboard.on('keydown', e => {this.keydown(e)}) // key press detection
     }
 
     keydown(event) {
@@ -27,7 +31,15 @@ export default class Snake {
     }
 
     update(time) {
-        this.body[0].x += this.direction.x;
-        this.body[0].y += this.direction.y;
+        if(time >= this.lastMoveTime + this.moveInterval) {
+            this.lastMoveTime = time;
+            this.move();
+        }
     }
+
+    move() {
+        this.body[0].x += this.direction.x *10;
+        this.body[0].y += this.direction.y *10;
+    }
+
 } 
