@@ -21,7 +21,9 @@ export default class Snake {
 
         this.apple = this.scene.add.rectangle(0,0,this.segment,this.segment,0x00ff00)
         .setOrigin(0); // apple
-
+        this.apple = this.scene.add.rectangle(0,0,this.segment,this.segment,0x00ff00)
+        .setOrigin(0); // apple
+        
         this.positionApple();
 
         scene.input.keyboard.on('keydown', e => {this.keydown(e)}) // key press detection
