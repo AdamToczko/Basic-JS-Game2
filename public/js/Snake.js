@@ -3,7 +3,7 @@ export default class Snake {
         this.scene = scene; // creating and assignin scene property 
 
         this.lastMoveTime = 0;
-        this.moveInterval = 300;
+        this.moveInterval = 100;
         this.segment = 16
 
         this.direction = Phaser.Math.Vector2.RIGHT; // start movement direction
@@ -21,9 +21,8 @@ export default class Snake {
 
         this.apple = this.scene.add.rectangle(0,0,this.segment,this.segment,0x00ff00)
         .setOrigin(0); // apple
-        this.apple = this.scene.add.rectangle(0,0,this.segment,this.segment,0x00ff00)
-        .setOrigin(0); // apple
-        
+     
+
         this.positionApple();
 
         scene.input.keyboard.on('keydown', e => {this.keydown(e)}) // key press detection
@@ -34,6 +33,8 @@ export default class Snake {
         this.apple.x = Math.floor((Math.random() * this.scene.game.config.width) / this.segment) * this.segment;
         this.apple.y = Math.floor((Math.random() * this.scene.game.config.height) / this.segment) * this.segment
     }
+
+
 
     keydown(event) {
         switch(event.keyCode) {
