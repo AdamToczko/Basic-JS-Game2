@@ -17,6 +17,6 @@
   "homepage": "https://github.com/AdamToczko/Basic-JS-Game2#readme",
   "description": "",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.18.2"
   }
 }
